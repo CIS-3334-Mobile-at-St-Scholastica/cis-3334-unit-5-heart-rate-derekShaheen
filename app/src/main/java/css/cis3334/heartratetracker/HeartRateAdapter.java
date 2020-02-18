@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 
 /**
@@ -51,6 +52,42 @@ public class HeartRateAdapter  extends ArrayAdapter<HeartRate> {
 
         TextView tvPulse=(TextView)view.findViewById(R.id.textViewPulse);
         tvPulse.setText(hr.getPulse().toString());
+
+        // {"Resting", "Moderate", "Endurance", "Aerobic","Anaerobic","Red zone"};
+        TextView tvRange=(TextView)view.findViewById(R.id.textViewRange);
+        String hrString = hr.getRangeName().toString();
+        int hrColor = 0;
+        switch (hrString){
+            case "Resting":
+                hrColor = R.color.colorPrimary;
+                break;
+            case "Moderate":
+                hrColor = R.color.color0;
+                break;
+            case "Endurance":
+                hrColor = R.color.color1;
+                break;
+            case "Aerobic":
+                hrColor = R.color.color2;
+                break;
+            case "Anaerobic":
+                hrColor = R.color.color3;
+                break;
+            case "Red zone":
+                hrColor = R.color.color4;
+                break;
+            default:
+                hrColor = R.color.colorPrimary;
+                break;
+        }
+
+        tvRange.setTextColor(
+                ContextCompat.getColor(context,hrColor));
+
+        tvRange.setText(hrString);
+
+        TextView tvRangeDesc=(TextView)view.findViewById(R.id.textViewDesc);
+        tvRangeDesc.setText(hr.getRangeDescrtiption().toString());
 
         return(view);
     }
